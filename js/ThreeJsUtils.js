@@ -51,32 +51,36 @@ function map(value,max,minrange,maxrange) {
 }
 
 var manager = new THREE.LoadingManager();
-manager.onProgress = function ( item, loaded, total ) {
-    // console.log( item, loaded, total );
-};
-function loadModel(model, material){
-    var loader = new THREE.OBJLoader( manager );
-    // var loader = new THREE.OBJLoaderGEO( manager );
-    loader.load( model, function ( object ) {
 
-        object.traverse( function ( child ) {
+function loadModel(model, material, params) {
+    var loader = new THREE.OBJLoaderGEO(manager);
+    loader.load(model, function(object) {
 
-            if ( child instanceof THREE.Mesh ) {
+        object.traverse(function(child) {
+
+            if (child instanceof THREE.Mesh) {
                 child.material = material;
+                child.geometry.computeVertexNormals();
+                child.geometry.mergeVertices();
             }
-        } );
+        });
+        object.scale.x = object.scale.y = object.scale.z = params.scale;
+        object.position.copy(params.position);
+        object.rotation.copy(params.rotation);
+
         scene.add(object);
-    }, onProgress, onError );
+        objects.push(object);
+
+    }, onProgress, onError);
 }
-function onProgress( xhr ) {
-if ( xhr.lengthComputable ) {
-    var percentComplete = xhr.loaded / xhr.total * 100;
-    // console.log( Math.round(percentComplete, 2) + '% downloaded' );
+
+function onProgress(xhr) {
+    if (xhr.lengthComputable) {
+        var percentComplete = xhr.loaded / xhr.total * 100;
     }
 };
 
-function onError( xhr ) {
-};
+function onError(xhr) {};
 function createTex(string){
     var tex = THREE.ImageUtils.loadTexture(string);
     tex.wrapS = THREE.RepeatWrapping;

@@ -51,21 +51,22 @@ function addLights(){
 function loadModels(){
     var urls = ["Environment.jpg","Environment.jpg","Environment.jpg","Environment.jpg","Environment.jpg","Environment.jpg"];
     var abstractCube = THREE.ImageUtils.loadTextureCube(urls, THREE.CubeRefractionMapping);
+    var logoCube = THREE.ImageUtils.loadTextureCube(urls);
     abstractCube.minFilter = abstractCube.magFilter = THREE.NearestFilter;
     var abstractMat = new THREE.MeshBasicMaterial({
         envMap: abstractCube,
-        refractionRatio: 0.05,
+        refractionRatio: 0.8,
         side: 2
     })
-    loadModel("Abstract Mesh.obj", abstractMat);
+    loadModel("Abstract Mesh.obj", abstractMat, {scale: 1.0, position: new THREE.Vector3(0.0,0.0,0.0), rotation: new THREE.Vector3(0.0,0.0,0.0)});
     var logoMat = new THREE.MeshPhongMaterial({
-        envMap: abstractCube,
+        envMap: logoCube,
         side: 2,
         color: 0x000000,
         reflectivity: 0.05,
         combine: THREE.MixOperation 
     })
-    loadModel("Extruded Logo.obj", logoMat);
+    loadModel("Extruded Logo.obj", logoMat, {scale: 1.0, position: new THREE.Vector3(0.0,0.0,0.0), rotation: new THREE.Vector3(0.0,0.0,0.0)});
 
 }
 function animate(){
