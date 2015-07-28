@@ -34,6 +34,31 @@ function init() {
 
     addLights();
     loadModels();
+    var path = "./";
+    var format = '.png';
+    var urls = [
+        path + 'px' + format, path + 'nx' + format,
+        path + 'py' + format, path + 'ny' + format,
+        path + 'pz' + format, path + 'nz' + format
+    ];
+
+    var envCube = THREE.ImageUtils.loadTextureCube( urls );
+    var shader = THREE.ShaderLib[ "cube" ];
+    shader.uniforms[ "tCube" ].value = envCube;
+
+    var material = new THREE.ShaderMaterial( {
+
+        fragmentShader: shader.fragmentShader,
+        vertexShader: shader.vertexShader,
+        uniforms: shader.uniforms,
+        depthWrite: false,
+        side: THREE.BackSide
+
+    } ),
+
+    mesh = new THREE.Mesh( new THREE.BoxGeometry( 100, 100, 100 ), material );
+    scene.add( mesh );
+
     // document.addEventListener( 'mousemove', onDocumentMouseMove, false );
     // document.addEventListener( 'mousedown', onDocumentMouseDown, false );
     document.addEventListener( 'keydown', function(){screenshot(renderer)}, false );
@@ -45,6 +70,11 @@ function addLights(){
     light.position.set(0,1, 0);
     scene.add(light);
 
+    var light = new THREE.DirectionalLight(0xffffff, 1.0);
+    light.position.set(0,-1, 0);
+    scene.add(light);
+    
+
     // var light = new THREE.AmbientLight(0xffffff, 1.0);
     // scene.add(light);
 }
@@ -55,10 +85,10 @@ function loadModels(){
     abstractCube.minFilter = abstractCube.magFilter = THREE.NearestFilter;
     var abstractMat = new THREE.MeshBasicMaterial({
         envMap: abstractCube,
-        refractionRatio: 0.8,
+        refractionRatio: 0.9,
         side: 2
     })
-    loadModel("Abstract Mesh.obj", abstractMat, {scale: 1.0, position: new THREE.Vector3(0.0,0.0,0.0), rotation: new THREE.Vector3(0.0,0.0,0.0)});
+    loadModel("Abstract Mesh 2.obj", abstractMat, {scale: 1.0, position: new THREE.Vector3(0.0,0.0,0.0), rotation: new THREE.Vector3(0.0,0.0,0.0)});
     var logoMat = new THREE.MeshPhongMaterial({
         envMap: logoCube,
         side: 2,
@@ -66,7 +96,7 @@ function loadModels(){
         reflectivity: 0.05,
         combine: THREE.MixOperation 
     })
-    loadModel("Extruded Logo.obj", logoMat, {scale: 1.0, position: new THREE.Vector3(0.0,0.0,0.0), rotation: new THREE.Vector3(0.0,0.0,0.0)});
+    loadModel("Extruded Logo Triangulated.obj", logoMat, {scale: 1.0, position: new THREE.Vector3(0.0,0.0,0.0), rotation: new THREE.Vector3(0.0,0.0,0.0)});
 
 }
 function animate(){
