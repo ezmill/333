@@ -9,7 +9,7 @@ var windowHalfY = window.innerHeight / 2;
 var start = Date.now(); 
 
 var index = 0;
-
+var objects = [];
 init();
 animate();
 
@@ -60,18 +60,18 @@ function init() {
     scene.add( mesh );
 
     // document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-    // document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+    document.addEventListener( 'mousedown', onDocumentMouseDown, false );
     document.addEventListener( 'keydown', function(){screenshot(renderer)}, false );
     // window.addEventListener( 'resize', onWindowResize, false );
 
 }
 function addLights(){
     var light = new THREE.DirectionalLight(0xffffff, 1.0);
-    light.position.set(0,1, 0);
+    light.position.set(1,0, 0.5);
     scene.add(light);
 
     var light = new THREE.DirectionalLight(0xffffff, 1.0);
-    light.position.set(0,-1, 0);
+    light.position.set(-1,0, 0.5);
     scene.add(light);
     
 
@@ -88,7 +88,6 @@ function loadModels(){
         refractionRatio: 0.9,
         side: 2
     })
-    loadModel("Abstract Mesh 2.obj", abstractMat, {scale: 1.0, position: new THREE.Vector3(0.0,0.0,0.0), rotation: new THREE.Vector3(0.0,0.0,0.0)});
     var logoMat = new THREE.MeshPhongMaterial({
         envMap: logoCube,
         side: 2,
@@ -97,6 +96,9 @@ function loadModels(){
         combine: THREE.MixOperation 
     })
     loadModel("Extruded Logo Triangulated.obj", logoMat, {scale: 1.0, position: new THREE.Vector3(0.0,0.0,0.0), rotation: new THREE.Vector3(0.0,0.0,0.0)});
+
+    loadModel("Abstract Mesh 2.obj", abstractMat, {scale: 2.0, position: new THREE.Vector3(0.0,0.0,0.0), rotation: new THREE.Vector3(0.0,0.0,0.0)});
+
 
 }
 function animate(){
@@ -116,13 +118,15 @@ function onDocumentMouseDown(event){
     //         window.location = blob;
     //     });
     // }
-    // console.log(camera.position.z);
+    // console.log( camera.position.z);
 
 
 }
 function draw(){
     
     time+=0.01;
+
+    objects[0].rotation.y += 0.001;
 
 	renderer.render(scene, camera);
 

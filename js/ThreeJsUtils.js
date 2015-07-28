@@ -66,7 +66,7 @@ function loadModel(model, material, params) {
         });
         object.scale.x = object.scale.y = object.scale.z = params.scale;
         object.position.copy(params.position);
-        object.rotation.copy(params.rotation);
+        // object.rotation.copy(params.rotation);
 
         scene.add(object);
         objects.push(object);
