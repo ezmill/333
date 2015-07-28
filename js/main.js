@@ -67,11 +67,11 @@ function init() {
 }
 function addLights(){
     var light = new THREE.DirectionalLight(0xffffff, 1.0);
-    light.position.set(1,0, 0.5);
+    light.position.set(1,0, 0.8);
     scene.add(light);
 
     var light = new THREE.DirectionalLight(0xffffff, 1.0);
-    light.position.set(-1,0, 0.5);
+    light.position.set(-1,0, 0.8);
     scene.add(light);
     
 
@@ -92,7 +92,7 @@ function loadModels(){
         envMap: logoCube,
         side: 2,
         color: 0x000000,
-        reflectivity: 0.05,
+        reflectivity: 0.15,
         combine: THREE.MixOperation 
     })
     loadModel("Extruded Logo Triangulated.obj", logoMat, {scale: 1.0, position: new THREE.Vector3(0.0,0.0,0.0), rotation: new THREE.Vector3(0.0,0.0,0.0)});
