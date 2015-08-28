@@ -5,7 +5,7 @@ var time = 0;
 
 var windowHalfX = window.innerWidth / 2;
 var windowHalfY = window.innerHeight / 2;
-
+var button = document.getElementById("shop");
 var start = Date.now(); 
 
 var index = 0;
@@ -62,6 +62,14 @@ function init() {
     // document.addEventListener( 'mousemove', onDocumentMouseMove, false );
     document.addEventListener( 'mousedown', onDocumentMouseDown, false );
     document.addEventListener( 'keydown', function(){screenshot(renderer)}, false );
+
+    button.addEventListener("mousedown", function(event){
+        var shop = document.createElement("iframe");
+        shop.src = "http://travisscott.myshopify.com/";
+        shop.frameborder = 0;
+        console.log("victoire");
+        container.innerHTML = "<iframe src='http://travisscott.myshopify.com/' frameborder='0'></iframe>";
+    });
     // window.addEventListener( 'resize', onWindowResize, false );
 
 }
@@ -132,3 +140,4 @@ function draw(){
 
 
 }
+
