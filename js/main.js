@@ -69,6 +69,7 @@ function init() {
         shop.frameborder = 0;
         console.log("victoire");
         container.innerHTML = "<iframe src='http://travisscott.myshopify.com/' frameborder='0'></iframe>";
+        button.style.display = "none";
     });
     // window.addEventListener( 'resize', onWindowResize, false );
 
