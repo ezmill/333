@@ -51,7 +51,11 @@ function map(value,max,minrange,maxrange) {
 }
 
 var manager = new THREE.LoadingManager();
+manager.onProgress = function ( item, loaded, total ) {
 
+    console.log( item, loaded, total );
+
+};
 function loadModel(model, material, params) {
     var loader = new THREE.OBJLoaderGEO(manager);
     loader.load(model, function(object) {
@@ -75,9 +79,11 @@ function loadModel(model, material, params) {
 }
 
 function onProgress(xhr) {
-    if (xhr.lengthComputable) {
+    if ( xhr.lengthComputable ) {
         var percentComplete = xhr.loaded / xhr.total * 100;
+        console.log( Math.round(percentComplete, 2) + '% downloaded' );
     }
+
 };
 
 function onError(xhr) {};

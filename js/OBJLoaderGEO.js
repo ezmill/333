@@ -22,7 +22,7 @@ THREE.OBJLoaderGEO.prototype = {
 
 			onLoad( scope.parse( text ) );
 
-		} );
+		}, onProgress, onError);
 
 	},
 

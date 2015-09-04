@@ -10,14 +10,26 @@ var start = Date.now();
 
 var index = 0;
 var objects = [];
+var loadedItems = 0;
 init();
-animate();
+function checkLoading() {
+
+    ++loadedItems;
+
+    if (loadedItems >= 3) {
+      document.getElementById("loading-container").style.display = "none";
+
+      animate();
+
+    }
+}
+// animate();
 
 function init() {
         
     camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.01, 100000);
     camera.position.set(0,0, 10);
-    controls = new THREE.OrbitControls(camera);
+    // controls = new THREE.OrbitControls(camera);
     
     scene = new THREE.Scene();
 
@@ -42,7 +54,7 @@ function init() {
         path + 'pz' + format, path + 'nz' + format
     ];
 
-    var envCube = THREE.ImageUtils.loadTextureCube( urls );
+    var envCube = THREE.ImageUtils.loadTextureCube( urls, null, checkLoading );
     var shader = THREE.ShaderLib[ "cube" ];
     shader.uniforms[ "tCube" ].value = envCube;
 
@@ -64,14 +76,11 @@ function init() {
     document.addEventListener( 'keydown', function(){screenshot(renderer)}, false );
 
     button.addEventListener("mousedown", function(event){
-        var shop = document.createElement("iframe");
-        shop.src = "http://travisscott.myshopify.com/";
-        shop.frameborder = 0;
-        console.log("victoire");
-        container.innerHTML = "<iframe src='http://travisscott.myshopify.com/' frameborder='0'></iframe>";
+        container.innerHTML = "<iframe src='http://nullgallery.myshopify.com/' frameborder='0'></iframe>";
         button.style.display = "none";
     });
-    // window.addEventListener( 'resize', onWindowResize, false );
+
+    window.addEventListener( 'resize', onWindowResize, false );
 
 }
 function addLights(){
@@ -88,9 +97,22 @@ function addLights(){
     // scene.add(light);
 }
 function loadModels(){
-    var urls = ["Environment.jpg","Environment.jpg","Environment.jpg","Environment.jpg","Environment.jpg","Environment.jpg"];
-    var abstractCube = THREE.ImageUtils.loadTextureCube(urls, THREE.CubeRefractionMapping);
-    var logoCube = THREE.ImageUtils.loadTextureCube(urls);
+    // var urls = ["Environment.jpg","Environment.jpg","Environment.jpg","Environment.jpg","Environment.jpg","Environment.jpg"];
+    var image = new Image();
+    image.onload = function(){
+
+    }
+    image.src = "Environment.jpg";
+
+    var urls = ["Environment-old.jpg",
+                "Environment-old.jpg",
+                "Environment-old.jpg",
+                "Environment-old.jpg",
+                "Environment-old.jpg",
+                "Environment-old.jpg"
+                ];
+    var abstractCube = THREE.ImageUtils.loadTextureCube(urls, THREE.CubeRefractionMapping, checkLoading);
+    var logoCube = THREE.ImageUtils.loadTextureCube(urls, null, checkLoading);
     abstractCube.minFilter = abstractCube.magFilter = THREE.NearestFilter;
     var abstractMat = new THREE.MeshBasicMaterial({
         envMap: abstractCube,
@@ -112,6 +134,7 @@ function loadModels(){
 }
 function animate(){
 	window.requestAnimationFrame(animate);
+
 	draw();
 }
 function onDocumentMouseDown(event){
@@ -130,6 +153,11 @@ function onDocumentMouseDown(event){
     // console.log( camera.position.z);
 
 
+}
+function onWindowResize(){
+    camera.aspect = window.innerWidth/window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
 }
 function draw(){
     
