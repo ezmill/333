@@ -126,9 +126,9 @@ function loadModels(){
         reflectivity: 0.15,
         combine: THREE.MixOperation 
     })
-    loadModel("Extruded Logo Triangulated.obj", logoMat, {scale: 1.0, position: new THREE.Vector3(0.0,0.0,0.0), rotation: new THREE.Vector3(0.0,0.0,0.0)});
+    loadModel("Extruded Logo Triangulated.obj", abstractMat, {scale: 1.0, position: new THREE.Vector3(0.0,0.0,0.0), rotation: new THREE.Vector3(0.0,0.0,0.0)});
 
-    loadModel("Abstract Mesh 2.obj", abstractMat, {scale: 2.0, position: new THREE.Vector3(0.0,0.0,0.0), rotation: new THREE.Vector3(0.0,0.0,0.0)});
+    loadModel("Abstract Mesh 2.obj", logoMat, {scale: 2.0, position: new THREE.Vector3(0.0,0.0,0.0), rotation: new THREE.Vector3(0.0,0.0,0.0)});
 
 
 }

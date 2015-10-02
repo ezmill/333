@@ -73,6 +73,7 @@ function loadModel(model, material, params) {
         // object.rotation.copy(params.rotation);
 
         scene.add(object);
+        console.log(object);
         objects.push(object);
 
     }, onProgress, onError);
