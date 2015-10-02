@@ -29,8 +29,8 @@ function init() {
         
     camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.01, 100000);
     camera.position.set(0,0, 10);
-    // controls = new THREE.OrbitControls(camera);
-    
+    controls = new THREE.OrbitControls(camera);
+    controls.noZoom = true;
     scene = new THREE.Scene();
 
     renderer = new THREE.WebGLRenderer( {preserveDrawingBuffer: true, antialias:true} );
