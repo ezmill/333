@@ -61,7 +61,7 @@ function init() {
     addLights();
     loadModels();
     var path = "./";
-    var format = '.png';
+    var format = '.jpg';
     var urls = [
         path + 'px' + format, path + 'nx' + format,
         path + 'py' + format, path + 'ny' + format,
