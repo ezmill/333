@@ -12,7 +12,8 @@
 
 	}
 	#shop{
-	  	  font-family: "HelveticaLT";
+	  	  font-family: "Helvetica";
+
 		border: none;
 	    position: fixed;
 	    bottom: 60px;
@@ -66,19 +67,62 @@
 		width: 100vw;
 		height: 100vh;
 	}
+	
+	#mobile-layout{
+		display: none;
+		width: 100%;
+	    margin: 0 auto;
+	    text-align: center;
+
+	}
+	#desktop-layout{
+		display: none;
+	}
+	#shop-mobile{
+  	    font-family: "Helvetica";
+		border: none;
+	    color: black;
+	    background: white;
+	    width: 160px;
+	    font-size: 24px;
+	    /*max-width: 100px;*/
+	    height: 60px;
+	    z-index: 10001;
+	    font-weight: 900;
+	    text-align: center;
+	    line-height: 30px;
+	    -webkit-transition: all 500ms ease;
+	    -moz-transition: all 500ms ease;
+	    -ms-transition: all 500ms ease;
+	    -o-transition: all 500ms ease;
+	    transition: all 500ms ease;
+	    margin-top: calc(75vh - 100px);
+	}
+	#shop-mobile:hover{
+		background: black;
+		color: white;
+	}
 	</style>
 </head>
 <body>
-	<div id="loading-container">
-		<div id="loading">
-			<img class="site-is" src="img/SITE IS LOADING.png" alt="">
-			<img class="gif" src="img/LOADING-GIF.gif" alt="">
+	<div id="desktop-layout">
+		<div id="loading-container">
+			<div id="loading">
+				<img class="site-is" src="img/SITE IS LOADING.png" alt="">
+				<img class="gif" src="img/LOADING-GIF.gif" alt="">
+			</div>
 		</div>
+		<button id="shop">
+			SHOP
+		</button>
+		<div id="container"></div>
 	</div>
-	<button id="shop">
-		SHOP
-	</button>
-	<div id="container"></div>
+	<div id="mobile-layout">
+		<button id="shop-mobile">
+			SHOP
+		</button>
+		<div id="container"></div>
+	</div>
 <script src="js/three.min.js"></script>
 <script src="js/OrbitControls.js"></script>
 <script src="js/OBJLoaderGEO.js"></script>
