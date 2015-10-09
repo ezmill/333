@@ -8,7 +8,8 @@ var windowHalfY = window.innerHeight / 2;
 var button = document.getElementById("shop");
 var mobileButton = document.getElementById("shop-mobile");
 var start = Date.now(); 
-
+var container = document.getElementById( 'container' );
+var mobileContainer = document.getElementById( 'container-mobile' );
 var index = 0;
 var objects = [];
 var loadedItems = 0;
@@ -35,7 +36,7 @@ function checkLoading() {
 function initMobile(){
     document.getElementById("mobile-layout").style.display = "block";
     mobileButton.addEventListener("mousedown", function(event){
-        container.innerHTML = "<iframe src='http://nullgallery.myshopify.com/' frameborder='0'></iframe>";
+        mobileContainer.innerHTML = "<iframe src='http://nullgallery.myshopify.com/' frameborder='0'></iframe>";
         mobileButton.style.display = "none";
     });
 }
@@ -55,7 +56,6 @@ function init() {
     renderer.gammaOutput = true;
     renderer.physicallyBasedShading = true;
     
-    container = document.getElementById( 'container' );
     container.appendChild( renderer.domElement );
 
     addLights();
